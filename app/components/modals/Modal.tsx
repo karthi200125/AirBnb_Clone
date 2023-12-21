@@ -13,7 +13,7 @@ interface ModalProps {
     actionLabel?: string;
     disabled?: boolean;
     secondaryAction?: () => void;
-    secondaryLabel?: string;
+    secondaryActionLabel?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
     body,
     footer,
     actionLabel,
-    secondaryLabel,
+    secondaryActionLabel,
     secondaryAction,
     disabled,
 }) => {
@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({
                             {/* HEADER */}
                             <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
                                 <button className="p-1 border-0 hover:opacity-70 transition absolute left-9" onClick={handleClose}>
-                                    <IoMdClose/>
+                                    <IoMdClose />
                                 </button>
                                 <div className="text-lg font-semibold">
                                     {title}
@@ -78,7 +78,19 @@ const Modal: React.FC<ModalProps> = ({
                             {/* FOOTER */}
                             <div className="flex flex-col gap-2 p-6">
                                 <div className="flex -flex-row items-center w-full gap-4">
-                                    <Button label="Button"/>
+                                    {secondaryAction && secondaryActionLabel && (
+                                        <Button
+                                            outline
+                                            disabled={disabled}
+                                            label={secondaryActionLabel}
+                                            onClick={handleSecondaryAction}
+                                        />
+                                    )}
+                                    <Button
+                                        disabled={disabled}
+                                        label={actionLabel}
+                                        onClick={handleSubmit}
+                                    />
                                 </div>
                             </div>
                         </div>
