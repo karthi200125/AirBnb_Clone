@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 import Button from '../Button';
 import UseLoginModal from '@/app/Hooks/UseLoginModal';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import UseregisterModal from '@/app/Hooks/UseregisterModal';
 
 const LoginModal = () => {
@@ -32,19 +32,19 @@ const LoginModal = () => {
         try {
             const callback = await signIn('credentials', { ...data, redirect: false });
             setIsLoading(false);
-    
+
             if (callback?.ok) {
                 toast.success("Login");
                 router.refresh();
             }
-    
+
             loginmodal.onClose();
-    
+
             if (callback?.error) {
                 toast.error(callback.error);
-            }            
+            }
         } catch (error) {
-            console.error(error);            
+            console.error(error);
         }
     };
 
@@ -59,8 +59,8 @@ const LoginModal = () => {
     const footerContent = (
         <div className='flex flex-col gap-4 mt-3'>
             <hr />
-            <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => { }} />
-            <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => { }} />
+            <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => signIn('google')} />
+            <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn('github')} />
             <div className='text-neutral-500 text-center mt-4 font-light'>
                 <div className=' justify-center flex flex-row items-center gap-2'>
                     <div>Already Have an account</div>
