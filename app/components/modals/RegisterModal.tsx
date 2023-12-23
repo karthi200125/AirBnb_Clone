@@ -4,13 +4,14 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import UseregisterModal from '../../Hooks/UseregisterModal';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../inputs/Input';
 import toast from 'react-hot-toast';
 import Button from '../Button';
 import { signIn } from 'next-auth/react';
+import UseLoginModal from '@/app/Hooks/UseLoginModal';
 
 
 const RegisterModal = () => {
@@ -24,6 +25,7 @@ const RegisterModal = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const registermodal = UseregisterModal();
+    const loginmodal = UseLoginModal();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
@@ -38,6 +40,11 @@ const RegisterModal = () => {
             setIsLoading(false)
         }
     }
+
+    const toggle = useCallback(() => {
+        loginmodal.onOpen()
+        registermodal.onClose()
+    }, [loginmodal, registermodal])
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -56,7 +63,7 @@ const RegisterModal = () => {
             <div className='text-neutral-500 text-center mt-4 font-light'>
                 <div className=' justify-center flex flex-row items-center gap-2'>
                     <div>Already Have an account</div>
-                    <div className='text-neutral-800 cursor-pointer hover:underline' onClick={registermodal.onClose}>Login</div>
+                    <div className='text-neutral-800 cursor-pointer hover:underline' onClick={toggle}>Login</div>
                 </div>
             </div>
         </div>

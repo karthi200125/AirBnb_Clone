@@ -6,6 +6,7 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/GetCurrentUser'
+import RentModal from './components/modals/RentModal'
 
 export const metadata: Metadata = {
   title: 'AirBnb',
@@ -22,6 +23,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
         {/* <ClientOnly> */}
         <RegisterModal />
         <LoginModal />
+        <RentModal/>
         <Toaster />
         <Navbar CurrentUser={CurrentUser} />
         {/* </ClientOnly> */}
