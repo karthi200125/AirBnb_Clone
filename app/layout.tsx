@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/GetCurrentUser'
 import RentModal from './components/modals/RentModal'
+import ClientOnly from './components/ClientOnly'
 
 export const metadata: Metadata = {
   title: 'AirBnb',
@@ -20,14 +21,16 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
     <html lang="en">
       <body className={font.className}>
-        {/* <ClientOnly> */}
-        <RegisterModal />
-        <LoginModal />
-        <RentModal/>
-        <Toaster />
-        <Navbar CurrentUser={CurrentUser} />
+        {/* <ClientOnly>         */}
+          <RegisterModal />
+          <LoginModal />
+          <RentModal />
+          <Toaster />
+          <Navbar CurrentUser={CurrentUser} />
         {/* </ClientOnly> */}
-        {children}
+        <div className='pb-20 pt-28'>
+          {children}
+        </div>
       </body>
     </html>
   )

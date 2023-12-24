@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
     return null;
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default ClientOnly;
