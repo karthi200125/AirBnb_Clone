@@ -9,6 +9,7 @@ import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   CurrentUser: SafeUser | null | undefined;
@@ -19,15 +20,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ CurrentUser }) => {
   const registerModal = UseregisterModal();
   const loginModal = UseLoginModal();
   const rentModal = UseRentModal();
+  const router = useRouter()
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prevValue) => !prevValue);
   }, []);
 
   const onRent = useCallback(() => {
-    if(CurrentUser) return rentModal.onOpen()
+    if (CurrentUser) return rentModal.onOpen()
     rentModal.onOpen()
-  },[CurrentUser ,loginModal , rentModal])
+  }, [CurrentUser, loginModal, rentModal])
 
   return (
     <div className="relative">
@@ -53,8 +55,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ CurrentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {CurrentUser ? (
               <>
-                <MenuItem onClick={() => { }} label="My trips" />
-                <MenuItem onClick={() => { }} label="My favourites" />
+                <MenuItem onClick={() => router.push('/trips')} label="My trips" />
+                <MenuItem onClick={() => router.push('/reservations')} label="My favourites" />
                 <MenuItem onClick={() => { }} label="My reservations" />
                 <MenuItem onClick={() => { }} label="My Properties" />
                 <MenuItem onClick={rentModal.onOpen} label="Airbnb my Home" />
