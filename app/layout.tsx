@@ -8,6 +8,7 @@ import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/GetCurrentUser'
 import RentModal from './components/modals/RentModal'
 import ClientOnly from './components/ClientOnly'
+import SearchModal from './components/modals/SearchModal'
 
 export const metadata: Metadata = {
   title: 'AirBnb',
@@ -24,6 +25,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
         {/* <ClientOnly>         */}
           <RegisterModal />
           <LoginModal />
+          <SearchModal />
           <RentModal />
           <Toaster />
           <Navbar CurrentUser={CurrentUser} />

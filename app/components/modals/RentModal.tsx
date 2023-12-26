@@ -112,7 +112,7 @@ const RentModal = () => {
 
     let bodyContent = (
         <div className="flex flex-col gap-8 ">
-            <Heading title='which od these best describers your place' subtitle="Pick a category" />
+            <Heading title='which of these best describers your place?' subtitle="Pick a category!" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
                 {categories.map((item) => (
                     <div key={item.label} className="col-span-1">
@@ -126,7 +126,7 @@ const RentModal = () => {
     if (step === STEPS.LOCATION) {
         bodyContent = (
             <div className="flex flex-col gap-8">
-                <Heading title="Where is your place located" subtitle="help guests find you" />
+                <Heading title="Where is your place located?" subtitle="Help guests find you!" />
                 <CountrySelect onChange={(value) => setCustomvalue('location', value)} value={location} />
                 <Map center={location?.latlng} />
             </div>
@@ -136,7 +136,7 @@ const RentModal = () => {
     if (step === STEPS.INFO) {
         bodyContent = (
             <div className="flex flex-col gap-8">
-                <Heading title="Share some Basics about your plane" subtitle="What aminities do you have?" />
+                <Heading title="Share some basics about your plan!" subtitle="What aminities do you have?" />
                 <Counter title="Guests" subtitle="How many Guests do you allow?" value={guestCount} onChange={(value) => setCustomvalue('guestcount', value)} />
                 <hr />
                 <Counter title="Rooms" subtitle="How many Rooms do you Have?" value={roomCount} onChange={(value) => setCustomvalue('roomcount', value)} />
@@ -170,7 +170,7 @@ const RentModal = () => {
     if (step === STEPS.PRICE) {
         bodyContent = (
             <div className="flex flex-col gap-8">
-                <Heading title="Now , Set your Price" subtitle="How much do you charge per night" />
+                <Heading title="Now , Set your Price!" subtitle="How much do you charge per Night?" />
                 <Input id="price" label="Price" formatPrice type="number" disabled={isLoading} register={register} errors={errors} required />
             </div>
         )

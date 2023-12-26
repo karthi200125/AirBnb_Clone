@@ -1,9 +1,7 @@
-'use client'
-
-import getCurrentUser from "../actions/GetCurrentUser"
-import getReseravtions from "../actions/GetReservations"
-import EmptyState from "../components/EmptyState"
-import ReservationsClient from "./ReservationsClient"
+import getCurrentUser from "../actions/GetCurrentUser";
+import getReseravtions from "../actions/GetReservations";
+import EmptyState from "../components/EmptyState";
+import ReservationsClient from "./ReservationsClient";
 
 const Reservationpage = async () => {
 
@@ -22,10 +20,8 @@ const Reservationpage = async () => {
     }
 
     return (
-        // <ReservationsClient reservations={reservations} CurrentUser={CurrentUser} />
-        'hi'
+        <ReservationsClient reservations={reservations} CurrentUser={CurrentUser} />        
     )
-
 }
 
-export default Reservationpage
+export default Reservationpage;

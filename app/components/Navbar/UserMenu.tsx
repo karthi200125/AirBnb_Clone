@@ -26,6 +26,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ CurrentUser }) => {
     setIsOpen((prevValue) => !prevValue);
   }, []);
 
+  const closeMenu = useCallback(() => {
+    setIsOpen(false)
+  }, [])
+
   const onRent = useCallback(() => {
     if (CurrentUser) return rentModal.onOpen()
     rentModal.onOpen()
@@ -55,18 +59,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ CurrentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {CurrentUser ? (
               <>
-                <MenuItem onClick={() => router.push('/trips')} label="My trips" />
-                <MenuItem onClick={() => router.push('/reservations')} label="My favourites" />
-                <MenuItem onClick={() => { }} label="My reservations" />
-                <MenuItem onClick={() => { }} label="My Properties" />
+                <MenuItem onClick={() => { router.push('/trips'); closeMenu() }} label="My trips" />
+                <MenuItem onClick={() => { router.push('/favorites'); closeMenu() }} label="My favourites" />
+                <MenuItem onClick={() => { router.push('/reservations'); closeMenu() }} label="My reservations" />
+                <MenuItem onClick={() => { router.push('/properties'); closeMenu() }} label="My Properties" />
                 <MenuItem onClick={rentModal.onOpen} label="Airbnb my Home" />
                 <hr />
-                <MenuItem onClick={() => signOut()} label="Logout" />
+                <MenuItem onClick={() => { signOut(); closeMenu(); }} label="Logout" />
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Login" />
-                <MenuItem onClick={registerModal.onOpen} label="SignUp" />
+                <MenuItem onClick={() => { loginModal.onOpen(); closeMenu(); }} label="Login" />
+                <MenuItem onClick={() => { registerModal.onOpen(); closeMenu(); }} label="SignUp" />
               </>
             )}
           </div>

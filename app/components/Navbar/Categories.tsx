@@ -15,7 +15,7 @@ export const categories = [
     { label: "Beach", icon: TbBeach, description: "this property is close to the beach" },
     { label: "Windmills", icon: GiWindmill, description: "this property has  Windmills" },
     { label: "Modern", icon: MdOutlineVilla, description: "this property has  Windmills" },
-    { label: "Count5ryside ", icon: TbMountain, description: "this property is in the country side" },
+    { label: "Counttryside ", icon: TbMountain, description: "this property is in the country side" },
     { label: "Pools ", icon: TbPool, description: "this property  has the pools" },
     { label: "Islands ", icon: GiIsland, description: "this property  is on island" },
     { label: "Lake ", icon: GiBoatFishing, description: "this property  is in close to lake" },
