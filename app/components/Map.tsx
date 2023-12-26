@@ -1,36 +1,43 @@
 'use client'
 
-import L from 'leaflet'
+import L from 'leaflet';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markericon from 'leaflet/dist/images/marker-icon.png';
+import markershadow from 'leaflet/dist/images/marker-shadow.png';
 
-import 'leaflet/dist/leaflet.css'
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
-import markericon from 'leaflet/dist/images/marker-icon.png'
-import markershadow from 'leaflet/dist/images/marker-shadow.png'
+declare module 'leaflet' {
+  namespace Icon {
+    interface Default {
+      _getIconUrl?: (name: string) => string;
+    }
+  }
+}
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconUrl: markericon.src,
-    iconRetinUrl: markerIcon2x.src,
-    shadowUrl: markershadow.src
-})
+  iconUrl: markericon.src,
+  iconRetinUrl: markerIcon2x.src,
+  shadowUrl: markershadow.src,
+});
 
 interface MapProps {
-    center?: number[]
+  center?: number[];
 }
 
 const Map: React.FC<MapProps> = ({ center }) => {
-    return (
-        <MapContainer center={center as L.LatLngExpression || [51, -0.09]} zoom={center ? 4 : 2} scrollWheelZoom={false} className='h-[35vh] rounded-lg '>
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {center && (
-                <Marker position={center as L.LatLngExpression}/>
-            )}
-        </MapContainer>
-    )
-}
+  return (
+    <MapContainer center={center as L.LatLngExpression || [51, -0.09]} zoom={center ? 4 : 2} scrollWheelZoom={false} className='h-[35vh] rounded-lg '>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {center && (
+        <Marker position={center as L.LatLngExpression}/>
+      )}
+    </MapContainer>
+  );
+};
 
-export default Map
+export default Map;
