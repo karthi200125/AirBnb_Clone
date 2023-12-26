@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-interface AvatarProps { src: String | null | undefined }
+interface AvatarProps { src: string | null | undefined }
 
 const Avatar: React.FC<AvatarProps> = ({ src }) => {
   return (
