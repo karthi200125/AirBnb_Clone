@@ -11,7 +11,7 @@ import ClientOnly from './components/ClientOnly'
 import SearchModal from './components/modals/SearchModal'
 
 export const metadata: Metadata = {
-  title: 'AirBnb',
+  title: 'AirBnb | Holiday rentals',
   description: 'Airbnb clone',
 }
 
