@@ -1,33 +1,45 @@
-import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import { Toaster } from 'react-hot-toast'
-import getCurrentUser from './actions/GetCurrentUser'
-import Navbar from './components/Navbar/Navbar'
-import LoginModal from './components/modals/LoginModal'
-import RegisterModal from './components/modals/RegisterModal'
-import RentModal from './components/modals/RentModal'
-import SearchModal from './components/modals/SearchModal'
-import './globals.css'
 
-export const metadata: Metadata = {
-  title: 'AirBnb ',
-  description: 'Airbnb clone',
+import Navbar from '@/app/components/navbar/Navbar';
+import LoginModal from '@/app/components/modals/LoginModal';
+import RegisterModal from '@/app/components/modals/RegisterModal';
+import SearchModal from '@/app/components/modals/SearchModal';
+import RentModal from '@/app/components/modals/RentModal';
+
+import ToasterProvider from '@/app/providers/ToasterProvider';
+
+import './globals.css'
+import ClientOnly from './components/ClientOnly';
+import getCurrentUser from './actions/getCurrentUser';
+
+export const metadata = {
+  title: 'Airbnb',
+  description: 'Airbnb Clone',
 }
 
-const font = Nunito({ subsets: ["latin"] })
+const font = Nunito({ 
+  subsets: ['latin'], 
+});
 
-export default async function RootLayout({ children, }: { children: React.ReactNode }) {
-  const CurrentUser = await getCurrentUser();
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
-      <body className={font.className}>        
-          <RegisterModal />
+      <body className={font.className}>
+        <ClientOnly>
+          <ToasterProvider />
           <LoginModal />
+          <RegisterModal />
           <SearchModal />
           <RentModal />
-          <Toaster />
-          <Navbar CurrentUser={CurrentUser} />        
-        <div className='pb-20 pt-28'>
+          <Navbar currentUser={currentUser} />
+        </ClientOnly>
+        <div className="pb-20 pt-28">
           {children}
         </div>
       </body>

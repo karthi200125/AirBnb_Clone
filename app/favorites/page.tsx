@@ -1,18 +1,35 @@
-import getCurrentUser from "../actions/GetCurrentUser"
-import getFavoritesListings from "../actions/GetFavoriteListings"
-import EmptyState from "../components/EmptyState"
-import FavoritesClient from "./FavoritesClient"
 
+import EmptyState from "@/app/components/EmptyState";
+import ClientOnly from "@/app/components/ClientOnly";
+
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import getFavoriteListings from "@/app/actions/getFavoriteListings";
+
+import FavoritesClient from "./FavoritesClient";
 
 const ListingPage = async () => {
+  const listings = await getFavoriteListings();
+  const currentUser = await getCurrentUser();
 
-    const listings = await getFavoritesListings()
-    const CurrentUser = await getCurrentUser()
-    if (listings.length === 0) return <EmptyState title="No Favorites Found" subtitle="Lokks Like you have no Favorite Listings" />
-
+  if (listings.length === 0) {
     return (
-        <FavoritesClient listings={listings} CurrentUser={CurrentUser} />
-    )
-}
+      <ClientOnly>
+        <EmptyState
+          title="No favorites found"
+          subtitle="Looks like you have no favorite listings."
+        />
+      </ClientOnly>
+    );
+  }
 
-export default ListingPage
+  return (
+    <ClientOnly>
+      <FavoritesClient
+        listings={listings}
+        currentUser={currentUser}
+      />
+    </ClientOnly>
+  );
+}
+ 
+export default ListingPage;

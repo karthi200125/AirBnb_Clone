@@ -1,78 +1,149 @@
-"use client";
-import axios from 'axios';
+'use client';
+
+import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
+import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import UseregisterModal from '../../Hooks/UseregisterModal';
-import { useCallback, useState } from 'react';
-import Modal from './Modal';
-import Heading from '../Heading';
-import Input from '../inputs/Input';
-import toast from 'react-hot-toast';
-import Button from '../Button';
-import { signIn } from 'next-auth/react';
-import UseLoginModal from '@/app/Hooks/UseLoginModal';
+import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
+import { 
+  FieldValues, 
+  SubmitHandler,
+  useForm
+} from "react-hook-form";
 
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 
-const RegisterModal = () => {
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<FieldValues>({
-        defaultValues: {
-            name: '',
-            email: '',
-            password: ""
-        }
-    });
+import Modal from "./Modal";
+import Input from "../inputs/Input";
+import Heading from "../Heading";
+import Button from "../Button";
 
-    const [isLoading, setIsLoading] = useState(false);
-    const registermodal = UseregisterModal();
-    const loginmodal = UseLoginModal();
+const RegisterModal= () => {
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        setIsLoading(true)
-        try {
-            axios.post('/api/register', data)
-            registermodal.onClose();
-            loginmodal.onOpen()
-            toast.success("User Created Successfully")
-        } catch (error) {
-            toast.error("Somthing Went Wrong")
-        }
-        finally {
-            setIsLoading(false)
-        }
-    }
+  const { 
+    register, 
+    handleSubmit,
+    formState: {
+      errors,
+    },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: ''
+    },
+  });
 
-    const toggle = useCallback(() => {
-        loginmodal.onOpen()
-        registermodal.onClose()
-    }, [loginmodal, registermodal])
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
 
-    const bodyContent = (
-        <div className='flex flex-col gap-4'>
-            <Heading title='Welcome to Airbnb' subtitle='Create an account' />
-            <Input id='email' label='Email' disabled={isLoading} register={register} errors={errors} required />
-            <Input id='name' label='Name' disabled={isLoading} register={register} errors={errors} required />
-            <Input id='password' type='password' label='Password' disabled={isLoading} register={register} errors={errors} required />
-        </div>
-    )
+    axios.post('/api/register', data)
+    .then(() => {
+      toast.success('Registered!');
+      registerModal.onClose();
+      loginModal.onOpen();
+    })
+    .catch((error) => {
+      toast.error(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    })
+  }
 
-    const footerContent = (
-        <div className='flex flex-col gap-4 mt-3'>
-            <hr />
-            <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => signIn('google')} />
-            <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn('github')} />
-            <div className='text-neutral-500 text-center mt-4 font-light'>
-                <div className=' justify-center flex flex-row items-center gap-2'>
-                    <div>Already Have an account</div>
-                    <div className='text-neutral-800 cursor-pointer hover:underline' onClick={toggle}>Login</div>
-                </div>
-            </div>
-        </div>
-    )
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal])
 
-    return (
-        <Modal disabled={isLoading} isOpen={registermodal.isOpen} title='Register' actionLabel='Continue' onClose={registermodal.onClose} onSubmit={handleSubmit(onSubmit)} body={bodyContent} footer={footerContent} />
-    );
-};
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <Heading
+        title="Welcome to Airbnb"
+        subtitle="Create an account!"
+      />
+      <Input
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="name"
+        label="Name"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+    </div>
+  )
+
+  const footerContent = (
+    <div className="flex flex-col gap-4 mt-3">
+      <hr />
+      <Button 
+        outline 
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => signIn('google')} 
+      />
+      <Button 
+        outline 
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => signIn('github')}
+      />
+      <div 
+        className="
+          text-neutral-500 
+          text-center 
+          mt-4 
+          font-light
+        "
+      >
+        <p>Already have an account?
+          <span 
+            onClick={onToggle} 
+            className="
+              text-neutral-800
+              cursor-pointer 
+              hover:underline
+            "
+            > Log in</span>
+        </p>
+      </div>
+    </div>
+  )
+
+  return (
+    <Modal
+      disabled={isLoading}
+      isOpen={registerModal.isOpen}
+      title="Register"
+      actionLabel="Continue"
+      onClose={registerModal.onClose}
+      onSubmit={handleSubmit(onSubmit)}
+      body={bodyContent}
+      footer={footerContent}
+    />
+  );
+}
 
 export default RegisterModal;
