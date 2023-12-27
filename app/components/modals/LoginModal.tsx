@@ -56,7 +56,7 @@ const LoginModal = () => {
     const bodyContent = (
         <div className='flex flex-col gap-4'>
             <Heading title='Welcome Back' subtitle='Login in to your Account' />
-            <Input id='email' label='Email' disabled={isLoading} register={register} errors={errors} required />
+            <Input id='email' type='text' label='Email' disabled={isLoading} register={register} errors={errors} required />
             <Input id='password' type='password' label='Password' disabled={isLoading} register={register} errors={errors} required />
         </div>
     );

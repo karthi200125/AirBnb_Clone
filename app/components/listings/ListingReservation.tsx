@@ -4,14 +4,13 @@ import { Range } from "react-date-range";
 import Calendar from "../inputs/Calender";
 import Button from "../Button";
 
-
 interface ListingReservationProps {
     price: number;
     dateRange: Range;
     totalPrice: number;
     onChangeDate: (value: Range) => void;
     onSubmit: () => void;
-    disabled: boolean;
+    disabled?: boolean;
     disabledDates: Date[];
 }
 

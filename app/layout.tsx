@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import Navbar from './components/Navbar/Navbar'
-import RegisterModal from './components/modals/RegisterModal'
-import './globals.css'
 import { Toaster } from 'react-hot-toast'
-import LoginModal from './components/modals/LoginModal'
 import getCurrentUser from './actions/GetCurrentUser'
+import Navbar from './components/Navbar/Navbar'
+import LoginModal from './components/modals/LoginModal'
+import RegisterModal from './components/modals/RegisterModal'
 import RentModal from './components/modals/RentModal'
-import ClientOnly from './components/ClientOnly'
 import SearchModal from './components/modals/SearchModal'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AirBnb',
+  title: 'AirBnb | Rentals',
   description: 'Airbnb clone',
 }
 
@@ -22,14 +21,12 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
     <html lang="en">
       <body className={font.className}>
-        {/* <ClientOnly>         */}
-          <RegisterModal />
-          <LoginModal />
-          <SearchModal />
-          <RentModal />
-          <Toaster />
-          <Navbar CurrentUser={CurrentUser} />
-        {/* </ClientOnly> */}
+        <RegisterModal />
+        <LoginModal />
+        <SearchModal />
+        <RentModal />
+        <Toaster />
+        <Navbar CurrentUser={CurrentUser} />
         <div className='pb-20 pt-28'>
           {children}
         </div>

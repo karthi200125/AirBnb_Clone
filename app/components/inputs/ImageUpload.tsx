@@ -17,11 +17,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
     const imageUpload = useCallback((result: any) => {
         onChange(result.info.secure_url);
     }, [onChange]);
-
-    const handleUpload = () => {
-        // Handle upload logic if needed
-    };
-
+    
     return (
         <CldUploadWidget onUpload={imageUpload} options={{ maxFiles: 1 }} uploadPreset='y9j6fbfb'>
             {({ open }) => {
