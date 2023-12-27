@@ -1,6 +1,5 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
+  "compilerOptions": {    
     "target": "es5",
     "lib": [
       "dom",
@@ -24,10 +23,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ],      
+      "@/*": ["./app/*"]
     }
   },
   "include": [
