@@ -16,9 +16,7 @@ const page = async ({ params }: { params: IParams }) => {
     const currentUser = await getCurrentUser();
 
     return (
-        <div className="">
-            <ListingClient listing={listing} currentUser={currentUser} reservations={reservations} />
-        </div>
+        <ListingClient listing={listing} currentUser={currentUser} reservations={reservations} />
     );
 };
 
