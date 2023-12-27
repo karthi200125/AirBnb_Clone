@@ -5,7 +5,7 @@ import { SafeListing, SafeUser } from "../types"
 
 interface FavoritesClientProps {
     listings: SafeListing[];
-    CurrentUser?: SafeUser;
+    CurrentUser?: SafeUser | null;
 }
 
 const FavoritesClient: React.FC<FavoritesClientProps> = ({ listings, CurrentUser }) => {
