@@ -98,7 +98,7 @@ const SearchModal = () => {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading title="When do you Wnat to Go" subtitle="Make Sure evryone is free" />
-                <Calendar value={DateRange} onChange={(value) => setDateRange(value.selection)} />
+                <Calendar value={DateRange} onChange={(value) => setDateRange(value)} />
             </div>
         )
     }

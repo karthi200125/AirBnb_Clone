@@ -10,7 +10,7 @@ import SearchModal from './components/modals/SearchModal'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AirBnb | Rentals',
+  title: 'AirBnb ',
   description: 'Airbnb clone',
 }
 
@@ -20,13 +20,13 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   const CurrentUser = await getCurrentUser();
   return (
     <html lang="en">
-      <body className={font.className}>
-        <RegisterModal />
-        <LoginModal />
-        <SearchModal />
-        <RentModal />
-        <Toaster />
-        <Navbar CurrentUser={CurrentUser} />
+      <body className={font.className}>        
+          <RegisterModal />
+          <LoginModal />
+          <SearchModal />
+          <RentModal />
+          <Toaster />
+          <Navbar CurrentUser={CurrentUser} />        
         <div className='pb-20 pt-28'>
           {children}
         </div>
