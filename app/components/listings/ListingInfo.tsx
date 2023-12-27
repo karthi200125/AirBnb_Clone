@@ -14,18 +14,21 @@ const Map = dynamic(() => import('../Map'), {
 });
 
 interface ListingInfoProps {
-  user: SafeUser,
-  description: string;
-  guestCount: number;
-  roomCount: number;
-  bathroomCount: number;
-  category: {
-    icon: IconType,
-    label: string;
+    user: SafeUser | null;
     description: string;
-  } | undefined
-  locationValue: string;
+    guestCount: number;
+    roomCount: number;
+    bathroomCount: number;
+    category: {
+        icon: IconType,
+        label: string,
+        description: string,
+    } | null
+    locationValue: string
+
+
 }
+
 
 const ListingInfo: React.FC<ListingInfoProps> = ({
   user,
@@ -94,5 +97,5 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
     </div>
    );
 }
- 
-export default ListingInfo;
+
+export default ListingInfo
