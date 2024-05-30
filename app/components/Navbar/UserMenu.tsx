@@ -56,6 +56,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             hover:bg-neutral-100 
             transition 
             cursor-pointer
+            text-white
           "
         >
           Airbnb your home
@@ -119,7 +120,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   onClick={() => router.push('/properties')}
                 />
                 <MenuItem 
-                  label="Airbnb your home" 
+                  label="Create Rooms" 
                   onClick={rentModal.onOpen}
                 />
                 <hr />
